@@ -99,6 +99,21 @@ public class RedisAdapterTest {
         redisAdapter.close();
     }
 
+    @Test
+    public void testSelectDb() {
+        Enforcer enforcer = new Enforcer("examples/rbac_model.conf", "examples/rbac_policy.csv");
+        redisAdapter = new RedisAdapter(host, port);
+        // save policy to db 0
+        redisAdapter.savePolicy(enforcer.getModel());
+        // select db to 1
+        redisAdapter.selectDb(1);
+        // add policy to db 1
+        redisAdapter.addPolicy("p", "p", Arrays.asList("paul", "data2", "read"));
+        enforcer.clearPolicy();
+        redisAdapter.loadPolicy(enforcer.getModel());
+        testGetPolicy(enforcer, Arrays.asList(Arrays.asList("paul", "data2", "read")));
+    }
+
     private void testGetPolicy(Enforcer e, List<List<String>> res) {
         List<List<String>> policies = e.getPolicy();
         Assert.assertEquals(res, policies);
