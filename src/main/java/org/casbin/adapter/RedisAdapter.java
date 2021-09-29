@@ -130,6 +130,12 @@ public class RedisAdapter implements Adapter {
         jedis.close();
     }
 
+    public void selectDb(int dbIndex) {
+        if(jedis != null) {
+            jedis.select(dbIndex);
+        }
+    }
+
     private void newRedisAdapter(String host, int port, String key, String password) {
         this.key = key;
 
