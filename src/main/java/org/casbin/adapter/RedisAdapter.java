@@ -67,6 +67,7 @@ public class RedisAdapter implements Adapter {
      */
     @Override
     public void savePolicy(Model model) {
+        jedis.del(this.key);
         extracted(model, "p");
         extracted(model, "g");
     }
