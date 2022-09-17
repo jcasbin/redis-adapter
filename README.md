@@ -1,5 +1,6 @@
 # Redis Adapter 
 
+[![build](https://github.com/jcasbin/redis-adapter/actions/workflows/maven-ci.yml/badge.svg)](https://github.com/jcasbin/redis-adapter/actions)
 [![codebeat badge](https://codebeat.co/badges/560a67fc-53b6-4a10-8e1b-989f3bb4e5cb)](https://codebeat.co/projects/github-com-jcasbin-redis-adapter-master)
 [![codecov](https://codecov.io/gh/jcasbin/redis-adapter/branch/master/graph/badge.svg?token=5wzDaTC9UV)](https://codecov.io/gh/jcasbin/redis-adapter)
 [![Javadocs](https://www.javadoc.io/badge/org.casbin/shiro-casbin.svg)](https://www.javadoc.io/doc/org.casbin/shiro-casbin)
