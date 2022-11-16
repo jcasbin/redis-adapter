@@ -21,6 +21,7 @@ import org.casbin.adapter.util.Util;
 import org.casbin.jcasbin.model.Assertion;
 import org.casbin.jcasbin.model.Model;
 import org.casbin.jcasbin.persist.Adapter;
+import org.casbin.jcasbin.persist.BatchAdapter;
 import org.casbin.jcasbin.persist.Helper;
 import redis.clients.jedis.Jedis;
 
@@ -32,7 +33,7 @@ import java.util.*;
  * @author shy
  * @since 2021.04.13
  */
-public class RedisAdapter implements Adapter {
+public class RedisAdapter implements Adapter, BatchAdapter{
     private String key;
     private Jedis jedis;
 
@@ -109,6 +110,7 @@ public class RedisAdapter implements Adapter {
     /**
      * AddPolicies adds policy rules to the storage.
      */
+    @Override
     public void addPolicies(String sec, String ptype, List<List<String>> rules) {
         for (List<String> rule:rules) {
             addPolicy(sec, ptype, rule);
@@ -118,6 +120,7 @@ public class RedisAdapter implements Adapter {
     /**
      * RemovePolicies removes policy rules from the storage.
      */
+    @Override
     public void removePolicies(String sec, String ptype, List<List<String>> rules) {
         for (List<String> rule:rules) {
             removePolicy(sec, ptype, rule);
