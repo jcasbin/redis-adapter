@@ -103,8 +103,27 @@ public class RedisAdapter implements Adapter, BatchAdapter{
     @Override
     public void removeFilteredPolicy(String sec, String ptype, int fieldIndex, String... fieldValues) {
         List<String> values = Optional.of(Arrays.asList(fieldValues)).orElse(new ArrayList<>());
-        throw new RuntimeException("not implement");
+        if (CollectionUtils.isEmpty(values)) {
+            return;
+        }
 
+        String regexRule = "";
+        for (int i = 0; i < values.size(); ++i) {
+            regexRule += "v" + fieldIndex + ":" + values.get(i) + (i + 1 == values.size() ? "" : ",");
+            fieldIndex++;
+        }
+        List<String> rulesMatch = jedis.lrange(this.key, 0, -1);
+        jedis.ltrim(this.key, 1, 0);
+
+        String finalRegexRule = ".*" + regexRule + ".*";
+        rulesMatch.forEach(rule -> {
+            // "{}" is regex symbol in rule lead to regex throw exception, so remove the char
+
+            String tempRule = rule.replaceAll("[\\{ | \\} | \"]", "");
+            if (!tempRule.matches(finalRegexRule)) {
+                jedis.rpush(this.key, rule);
+            }
+        });
     }
 
     /**
