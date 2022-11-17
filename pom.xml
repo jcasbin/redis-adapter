@@ -45,7 +45,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <slf4j.version>1.7.25</slf4j.version>
         <jedis.version>3.5.2</jedis.version>
-        <jcasbin.version>1.7.4</jcasbin.version>
+        <jcasbin.version>1.31.2</jcasbin.version>
         <json.version>1.2.76</json.version>
         <commons.version>3.2.2</commons.version>
 

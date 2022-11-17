@@ -100,6 +100,62 @@ public class RedisAdapterTest {
     }
 
     @Test
+    public void testRemoveFilteredPolicy() {
+        redisAdapter = new RedisAdapter(host, port);
+        Enforcer enforcer = new Enforcer("examples/rbac_model.conf", redisAdapter);
+
+        enforcer.clearPolicy();
+        redisAdapter.savePolicy(enforcer.getModel());
+
+        enforcer.addPolicies(Arrays.asList(
+                Arrays.asList("alice", "data1", "write"),
+                Arrays.asList("alice", "data1", "read"),
+                Arrays.asList("alice", "data2", "read"),
+                Arrays.asList("alice", "data2", "write"),
+                Arrays.asList("bob", "data1", "write"),
+                Arrays.asList("bob", "data1", "read"),
+                Arrays.asList("bob", "data2", "read"),
+                Arrays.asList("bob", "data2", "write")));
+
+        enforcer.removeFilteredPolicy(1, "data1", "read");
+        enforcer.clearPolicy();
+        enforcer.loadPolicy();
+        testGetPolicy(enforcer, Arrays.asList(
+                Arrays.asList("alice", "data1", "write"),
+                Arrays.asList("alice", "data2", "read"),
+                Arrays.asList("alice", "data2", "write"),
+                Arrays.asList("bob", "data1", "write"),
+                Arrays.asList("bob", "data2", "read"),
+                Arrays.asList("bob", "data2", "write")));
+
+        enforcer.removeFilteredPolicy(0, "alice");
+        enforcer.clearPolicy();
+        redisAdapter.loadPolicy(enforcer.getModel());
+        testGetPolicy(enforcer, Arrays.asList(
+                Arrays.asList("bob", "data1", "write"),
+                Arrays.asList("bob", "data2", "read"),
+                Arrays.asList("bob", "data2", "write")));
+
+        enforcer.removeFilteredPolicy(0, "bob", "data1", "write");
+        enforcer.clearPolicy();
+        redisAdapter.loadPolicy(enforcer.getModel());
+        testGetPolicy(enforcer, Arrays.asList(
+                Arrays.asList("bob", "data2", "read"),
+                Arrays.asList("bob", "data2", "write")));
+
+        enforcer.removeFilteredPolicy(2, "read");
+        enforcer.clearPolicy();
+        redisAdapter.loadPolicy(enforcer.getModel());
+        testGetPolicy(enforcer, Arrays.asList(
+                Arrays.asList("bob", "data2", "write")));
+
+        enforcer.removeFilteredPolicy(1, "data2");
+        enforcer.clearPolicy();
+        redisAdapter.loadPolicy(enforcer.getModel());
+        testGetPolicy(enforcer, Arrays.asList());
+    }
+
+    @Test
     public void testSelectDb() {
         Enforcer enforcer = new Enforcer("examples/rbac_model.conf", "examples/rbac_policy.csv");
         redisAdapter = new RedisAdapter(host, port);

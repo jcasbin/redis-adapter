@@ -3,8 +3,8 @@
 [![build](https://github.com/jcasbin/redis-adapter/actions/workflows/maven-ci.yml/badge.svg)](https://github.com/jcasbin/redis-adapter/actions)
 [![codebeat badge](https://codebeat.co/badges/560a67fc-53b6-4a10-8e1b-989f3bb4e5cb)](https://codebeat.co/projects/github-com-jcasbin-redis-adapter-master)
 [![codecov](https://codecov.io/gh/jcasbin/redis-adapter/branch/master/graph/badge.svg?token=5wzDaTC9UV)](https://codecov.io/gh/jcasbin/redis-adapter)
-[![Javadocs](https://www.javadoc.io/badge/org.casbin/shiro-casbin.svg)](https://www.javadoc.io/doc/org.casbin/shiro-casbin)
-[![Maven Central](https://img.shields.io/maven-central/v/org.casbin/shiro-casbin.svg)](https://mvnrepository.com/artifact/org.casbin/shiro-casbin/latest)
+[![Javadocs](https://www.javadoc.io/badge/org.casbin/redis-adapter.svg)](https://www.javadoc.io/doc/org.casbin/redis-adapter)
+[![Maven Central](https://img.shields.io/maven-central/v/org.casbin/redis-adapter.svg)](https://mvnrepository.com/artifact/org.casbin/redis-adapter/latest)
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/casbin/lobby)
 
 Redis Adapter is the [Redis](https://redis.io/) adapter for [jCasbin](https://github.com/casbin/jcasbin). With this library, Casbin can load policy from Redis or save policy to it.
