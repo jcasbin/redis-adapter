@@ -37,14 +37,18 @@ public class RedisAdapter implements Adapter, BatchAdapter{
     private String key;
     private Jedis jedis;
 
-    public RedisAdapter(String host, int port) { newRedisAdapter(host, port, "casbin_rules", null); }
+    public RedisAdapter(String host, int port) { newRedisAdapter(host, port, "casbin_rules", null, null); }
 
     public RedisAdapter(String host, int port, String password) {
-        newRedisAdapter(host, port, "casbin_rules", password);
+        newRedisAdapter(host, port, "casbin_rules", null, password);
     }
 
     public RedisAdapter(String host, int port, String key, String password) {
-        newRedisAdapter(host, port, key, password);
+        newRedisAdapter(host, port, key, null, password);
+    }
+
+    public RedisAdapter(String host, int port, String key, String username, String password) {
+        newRedisAdapter(host, port, key, username, password);
     }
 
     /**
@@ -159,12 +163,17 @@ public class RedisAdapter implements Adapter, BatchAdapter{
         }
     }
 
-    private void newRedisAdapter(String host, int port, String key, String password) {
+    private void newRedisAdapter(String host, int port, String key, String username, String password) {
         this.key = key;
 
         jedis = new Jedis(host, port);
         if (password != null) {
-            jedis.auth(password);
+            if (username != null) {
+                jedis.auth(username, password);
+            }
+            else {
+                jedis.auth(password);
+            }
         }
 
         Util.logPrintf("Redis service is running ", jedis.ping());
