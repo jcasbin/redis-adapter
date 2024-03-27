@@ -30,8 +30,13 @@ public class Main {
     public static void main(String[] args) {
         // Initialize a Redis adapter and use it in a jCasbin enforcer:
         RedisAdapter a = new RedisAdapter("localhost", 6379);
+
         // Use the following if Redis has password like "123"
         // RedisAdapter a = new RedisAdapter("localhost", 6379, "123");
+
+        // Use the following if Redis has username like "default" and password like "123"
+        // RedisAdapter a = new RedisAdapter("localhost", 6379, "default", "123");
+
         Enforcer e = new Enforcer("examples/rbac_model.conf", a);
 
         // Load the policy from DB.
