@@ -5,7 +5,7 @@
 [![codecov](https://codecov.io/gh/jcasbin/redis-adapter/branch/master/graph/badge.svg?token=5wzDaTC9UV)](https://codecov.io/gh/jcasbin/redis-adapter)
 [![Javadocs](https://www.javadoc.io/badge/org.casbin/redis-adapter.svg)](https://www.javadoc.io/doc/org.casbin/redis-adapter)
 [![Maven Central](https://img.shields.io/maven-central/v/org.casbin/redis-adapter.svg)](https://mvnrepository.com/artifact/org.casbin/redis-adapter/latest)
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/casbin/lobby)
+[![Discord](https://img.shields.io/discord/1022748306096537660?logo=discord&label=discord&color=5865F2)](https://discord.gg/S5UjpzGZjN)
 
 Redis Adapter is the [Redis](https://redis.io/) adapter for [jCasbin](https://github.com/casbin/jcasbin). With this library, Casbin can load policy from Redis or save policy to it.
 
